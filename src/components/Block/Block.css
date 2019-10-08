@@ -1,0 +1,89 @@
+.block {
+  background: #262626;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 20% 55% 25%;
+  grid-template-areas: 
+    "header header header"
+    "inputs icon outputs"
+    "footer footer footer";
+  border-radius: 4px;
+}
+
+.block-header {
+  grid-area: header;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #F2F2F2;
+}
+
+.block-hash {
+  font-size: 6px;
+}
+
+.block-inputs-container {
+  grid-area: inputs;
+  overflow: scroll;
+  place-self: center;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+}
+
+.block-inputs-container .up-arrow {
+  transform-origin: center;
+  transform: rotate(180deg);
+}
+
+.up-arrow, .down-arrow {
+  fill: #F2636F;
+  fill: #30BFBF;
+}
+
+.block-outputs-container {
+  grid-area: outputs;
+  overflow: scroll;
+  place-self: center;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+}
+
+.block-inputs-left, .block-outputs-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.block-inputs-left p, .block-outputs-left p {
+  margin: 0;
+}
+
+.block-footer {
+  grid-area: footer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #F2F2F2;
+}
+
+.block-footer svg {
+  margin-left: 5px;
+  transform: rotate(-14deg);
+}
+
+.block-footer svg path {
+  fill: #F2636F;
+}
+
+.block-footer em {
+  font-size: 11px;
+}

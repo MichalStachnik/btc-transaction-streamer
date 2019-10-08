@@ -1,0 +1,21 @@
+.output {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.output p {
+  margin: 0;
+}
+
+.output .address {
+  font-size: 6px;
+  color: #30BFBF;
+  background: black;
+  padding: 4px;
+  border-radius: 4px;
+} 
+
+.output  .value {
+  color: #F2F2F2;
+}
