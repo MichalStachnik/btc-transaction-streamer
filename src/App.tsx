@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 
 import BlockList from './components/BlockList/BlockList';
+import About from './components/About/About';
 
 import './App.css';
 
@@ -26,10 +28,6 @@ class App extends Component<{}, { transactionStream: any[] }> {
     // Getting new transaction data and updating state
     this.WS.onmessage = (event) => {
       // Add one event to array
-      // let tenMostRecentTx: any[] = [...this.state.transactionStream, event.data];
-      // If length greater than 10 remove first
-      // if (tenMostRecentTx.length > 10) tenMostRecentTx.shift();
-      // this.setState({ transactionStream: tenMostRecentTx });
       this.setState((prevState, prevProps) => {
         return { transactionStream: [...prevState.transactionStream, event.data] }
       }, () => {
@@ -45,10 +43,15 @@ class App extends Component<{}, { transactionStream: any[] }> {
   render() {
     return (
       <div className="App">
-        <BlockList
-          className="block-list-container"
-          transactionStream={this.state.transactionStream}
-        />
+        <Route exact path='/'>
+          <BlockList
+            className="block-list-container"
+            transactionStream={this.state.transactionStream}
+          />
+        </Route>
+        <Route exact path='/about'>
+          <About/>
+        </Route>
       </div>
     );
   }
