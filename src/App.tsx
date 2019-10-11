@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
+import Header from './components/Header/Header';
 import BlockList from './components/BlockList/BlockList';
 import About from './components/About/About';
 
@@ -27,6 +28,8 @@ class App extends Component<{}, { transactionStream: any[] }> {
 
     // Getting new transaction data and updating state
     this.WS.onmessage = (event) => {
+      // let performance: any = window.performance;
+      // console.log(performance.memory);
       // Add one event to array
       this.setState((prevState, prevProps) => {
         return { transactionStream: [...prevState.transactionStream, event.data] }
@@ -42,10 +45,11 @@ class App extends Component<{}, { transactionStream: any[] }> {
   
   render() {
     return (
-      <div className="App">
+      <div className='App'>
+        <Header/>
         <Route exact path='/'>
           <BlockList
-            className="block-list-container"
+            className='block-list-container'
             transactionStream={this.state.transactionStream}
           />
         </Route>

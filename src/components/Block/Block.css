@@ -1,7 +1,7 @@
 .block {
   background: #262626;
-  width: 100%;
-  max-width: 100%;
+  width: 95%;
+  max-width: 95%;
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -18,6 +18,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   color: #F2F2F2;
 }
 
@@ -48,7 +49,6 @@
 
 .block-outputs-container {
   grid-area: outputs;
-  overflow: scroll;
   place-self: center;
   display: flex;
   justify-content: space-evenly;
@@ -65,6 +65,10 @@
 
 .block-inputs-left p, .block-outputs-left p {
   margin: 0;
+}
+
+.block-inputs-right, .block-outputs-right {
+  overflow: scroll;
 }
 
 .block-footer {
