@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-import BlockList from '../BlockList';
+import { BrowserRouter } from 'react-router-dom';
+import Header from '../Header';
+
 
 
 let div: any = null;
@@ -16,6 +18,10 @@ afterEach(() => {
 });
 
 it('renders without crashing', () => {
-  render(<BlockList className="mock-class" toggleLoading={false}/>, div);
+  render(
+    <BrowserRouter>
+      <Header isLoading={false}/>
+    </BrowserRouter>,
+    div);
   expect(div).toBeTruthy();
 });

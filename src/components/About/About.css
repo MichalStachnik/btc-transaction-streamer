@@ -1,0 +1,11 @@
+.about {
+  min-height: calc(100vh - 50px);
+  color: #F2F2F2;
+  margin-top: 20px;
+  width: 75%;
+  line-height: 34px;
+}
+
+p {
+  margin: 0;
+}

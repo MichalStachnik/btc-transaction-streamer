@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-import BlockList from '../BlockList';
+import About from '../About';
+
 
 
 let div: any = null;
@@ -16,6 +17,6 @@ afterEach(() => {
 });
 
 it('renders without crashing', () => {
-  render(<BlockList className="mock-class" toggleLoading={false}/>, div);
+  render(<About/>, div);
   expect(div).toBeTruthy();
 });
