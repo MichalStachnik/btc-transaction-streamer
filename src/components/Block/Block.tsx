@@ -23,10 +23,6 @@ class Block extends Component<{block: any }, {}> {
 
     return (
       <div className="block">
-        <div className="block-header">
-          <span className="block-hash">{ hash }</span> 
-          <span className="block-time">{ timeOutput }</span>
-        </div>
         <div className="block-inputs-container">
           <div className="block-inputs-left">
             <InputSvg/>
@@ -36,18 +32,24 @@ class Block extends Component<{block: any }, {}> {
           </div>
         </div>
         <div className="block-outputs-container">  
-          <div className="block-outputs-left">
+          <div className="block-outputs-icon">
             <OutputSvg/>
           </div>
-          <div className="block-outputs-right">
+          <div className="block-outputs-content">
             { outputs.map((output, index) => <Output output={output} key={index}/>) }
           </div>
         </div>
         <div className="block-footer">
-          <span>
-            <em>Total amount transacted:</em> { totalAmount }
-          </span>
-          <BtcSvg/>
+          <div className="block-footer-left">
+            <span className="block-hash">{ hash }</span> 
+            <span className="block-time">{ timeOutput }</span>
+          </div>
+          <div className="block-footer-right">
+            <span>
+              <em>Total amount transacted:</em> { totalAmount }
+            </span>
+            <BtcSvg/>
+          </div>
         </div>
       </div>
     );

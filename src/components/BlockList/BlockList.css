@@ -1,7 +1,6 @@
 .block-list {
   min-height: 100vh;
   min-width: 100vw;
-  background: black;
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-rows: 20vh;

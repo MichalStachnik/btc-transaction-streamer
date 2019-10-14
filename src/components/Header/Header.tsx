@@ -1,18 +1,42 @@
-import React from 'react';
+import React, { Component }  from 'react';
 import { NavLink } from 'react-router-dom';
+
+import { ReactComponent as LogoSvg } from '../../assets/logo.svg';
 
 import './Header.css';
 
-const Header: React.FC = () => {
-  return (
-    <header className='header'>
-      <h3>BTC Transaction Streamer</h3>
-      <nav>
-        <NavLink className='nav-home' exact to='/'>Home</NavLink>
-        <NavLink className='nab-about' exact to='/about'>About</NavLink>
-      </nav>
-    </header>
-  );
+class Header extends Component<{ isLoading: boolean }, { marketCap: number }> {
+  constructor(props: any) {
+    super(props);
+    
+    this.state = {
+      marketCap: 0
+    }
+  }
+
+  componentDidMount = () => {
+
+    fetch('https://blockchain.info/q/marketcap')
+      .then(res => res.json())
+      .then(data => this.setState({ marketCap: data }))
+      .catch(err => console.warn(err));
+  }
+
+  componentDidUpdate = () => {
+    console.log('header did update', this.props.isLoading);
+  }
+
+  render() {
+    return (
+      <header className='header'>
+        <LogoSvg className={ this.props.isLoading ? 'is-loading' : '' }/>
+        <nav>
+          <NavLink className='nav-home' exact to='/'>Home</NavLink>
+          <NavLink className='nav-about' exact to='/about'>About</NavLink>
+        </nav>
+      </header>
+    );
+  }
 }
 
 export default Header;

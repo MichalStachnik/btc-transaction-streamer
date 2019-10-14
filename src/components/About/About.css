@@ -5,3 +5,7 @@
   width: 75%;
   line-height: 34px;
 }
+
+p {
+  margin: 0;
+}

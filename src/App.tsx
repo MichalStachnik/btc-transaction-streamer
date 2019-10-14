@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, BrowserRouter } from 'react-router-dom';
 
 import Header from './components/Header/Header';
 import BlockList from './components/BlockList/BlockList';
@@ -7,56 +7,37 @@ import About from './components/About/About';
 
 import './App.css';
 
-class App extends Component<{}, { transactionStream: any[] }> {
+class App extends Component<{}, { isLoading: boolean }> {
   constructor(props: any) {
     super(props);
 
     this.state = {
-      transactionStream: []
+      isLoading: true
     }
   }
 
-  WS = new WebSocket('wss://ws.blockchain.info/inv')
-
-  componentDidMount = () => {
-
-    this.WS.onopen = () => {
-      console.log('connected');
-      const op = {"op":"unconfirmed_sub"};
-      this.WS.send(JSON.stringify(op));
-    }
-
-    // Getting new transaction data and updating state
-    this.WS.onmessage = (event) => {
-      // let performance: any = window.performance;
-      // console.log(performance.memory);
-      // Add one event to array
-      this.setState((prevState, prevProps) => {
-        return { transactionStream: [...prevState.transactionStream, event.data] }
-      }, () => {
-        // Close connection after 100 entries
-        if (this.state.transactionStream.length === 100){
-          console.log('closing web socket :(');
-          this.WS.close();
-        }
-      });  
-    }
+  toggleLoading = () => {
+    this.setState({ isLoading: false });
   }
   
   render() {
     return (
-      <div className='App'>
-        <Header/>
-        <Route exact path='/'>
-          <BlockList
-            className='block-list-container'
-            transactionStream={this.state.transactionStream}
+      <BrowserRouter>
+        <div className='App'>
+          <Header
+            isLoading={this.state.isLoading}
           />
-        </Route>
-        <Route exact path='/about'>
-          <About/>
-        </Route>
-      </div>
+          <Route exact path='/'>
+            <BlockList 
+              className='block-list-container'
+              toggleLoading={this.toggleLoading}
+            />
+          </Route>
+          <Route exact path='/about'>
+            <About/>
+          </Route>
+        </div>
+      </BrowserRouter>
     );
   }
 }
