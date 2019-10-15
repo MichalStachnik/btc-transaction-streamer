@@ -24,15 +24,15 @@ class Block extends Component<{block: any }, {}> {
     return (
       <div className="block">
         <div className="block-inputs-container">
-          <div className="block-inputs-left">
+          <div className="block-inputs-cover">
             <InputSvg/>
           </div>
-          <div className="block-inputs-right">
+          <div className="block-inputs-content">
             { inputs.map((input, index) => <Input input={input} key={index}/>) }
           </div>
         </div>
         <div className="block-outputs-container">  
-          <div className="block-outputs-icon">
+          <div className="block-outputs-cover">
             <OutputSvg/>
           </div>
           <div className="block-outputs-content">

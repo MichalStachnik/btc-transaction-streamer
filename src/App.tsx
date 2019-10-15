@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import Header from './components/Header/Header';
 import BlockList from './components/BlockList/BlockList';
@@ -12,32 +12,30 @@ class App extends Component<{}, { isLoading: boolean }> {
     super(props);
 
     this.state = {
-      isLoading: true
+      isLoading: false
     }
   }
 
   toggleLoading = () => {
-    this.setState({ isLoading: false });
+    this.setState({ isLoading: !this.state.isLoading });
   }
   
   render() {
     return (
-      <BrowserRouter>
-        <div className='App'>
-          <Header
-            isLoading={this.state.isLoading}
+      <div className='App'>
+        <Header
+          isLoading={this.state.isLoading}
+        />
+        <Route exact path='/'>
+          <BlockList 
+            className='block-list-container'
+            toggleLoading={this.toggleLoading}
           />
-          <Route exact path='/'>
-            <BlockList 
-              className='block-list-container'
-              toggleLoading={this.toggleLoading}
-            />
-          </Route>
-          <Route exact path='/about'>
-            <About/>
-          </Route>
-        </div>
-      </BrowserRouter>
+        </Route>
+        <Route exact path='/about'>
+          <About/>
+        </Route>
+      </div>
     );
   }
 }
