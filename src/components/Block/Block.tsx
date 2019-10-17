@@ -26,6 +26,7 @@ class Block extends Component<{block: any }, {}> {
         <div className="block-inputs-container">
           <div className="block-inputs-cover">
             <InputSvg/>
+            <p>Inputs</p>
           </div>
           <div className="block-inputs-content">
             { inputs.map((input, index) => <Input input={input} key={index}/>) }
@@ -34,6 +35,7 @@ class Block extends Component<{block: any }, {}> {
         <div className="block-outputs-container">  
           <div className="block-outputs-cover">
             <OutputSvg/>
+            <p>Outputs</p>
           </div>
           <div className="block-outputs-content">
             { outputs.map((output, index) => <Output output={output} key={index}/>) }

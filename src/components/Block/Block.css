@@ -52,13 +52,15 @@
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  flex-direction: column;
   height: 100%;
   width: 50%;
   margin: 0 auto;
   background: #262626;
   z-index: 1;
   transition: 0.5s all ease-in-out;
+  color: #F2F2F2;
 }
 
 .block-inputs-content, .block-outputs-content {
