@@ -15,16 +15,12 @@ class Header extends Component<{ isLoading: boolean }, { marketCap: number }> {
   }
 
   componentDidMount = () => {
-
     fetch('https://blockchain.info/q/marketcap')
       .then(res => res.json())
       .then(data => this.setState({ marketCap: data }))
       .catch(err => console.warn(err));
   }
 
-  componentDidUpdate = () => {
-    console.log('header did update', this.props.isLoading);
-  }
 
   render() {
     return (

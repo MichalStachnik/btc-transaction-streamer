@@ -13,15 +13,17 @@ svg {
 }
 
 .is-loading .loader-one {
-  animation: loaderOne 6s infinite;
+  animation: loader 6s infinite;
 }
 
 .is-loading .loader-two {
-  animation: loaderTwo 6s infinite;
+  animation: loader 6s infinite;
+  animation-delay: 1s;
 }
 
 .is-loading .loader-three {
-  animation: loaderThree 6s infinite;
+  animation: loader 6s infinite;
+  animation-delay: 2s;
 }
 
 nav {
@@ -55,42 +57,20 @@ a.active {
 }
 
 
-@keyframes loaderOne {
+@keyframes loader {
   0% {
     fill: #F2F2F2;
   }
-  40% {
+  20% {
     fill: #30BFBF;
-  }
-  100% {
-    fill: #30BFBF;
-  }
-}
-
-
-@keyframes loaderTwo {
-  0% {
-    fill: #F2F2F2;
-  }
-  30% {
-    fill: #F2F2F2;
-  }
-  60% {
-    fill: #30BFBF
-  }
-  100% {
-    fill: #30BFBF;
-  }
-}
-
-@keyframes loaderThree {
-  0% {
-    fill: #F2F2F2;
   }
   50% {
+    fill: #30BFBF;
+  }
+  70% {
     fill: #F2F2F2;
   }
   100% {
-    fill: #30BFBF;
+    fill: #F2F2F2;
   }
 }

@@ -21,6 +21,7 @@ class BlockList extends Component<{ toggleLoading: any } & { className: string }
       console.log('connected');
       const op = {"op":"unconfirmed_sub"};
       this.WS.send(JSON.stringify(op));
+      this.props.toggleLoading();
     }
 
     // Getting new transaction data and updating state
