@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import BlockList from './components/BlockList/BlockList';
 import About from './components/About/About';
+import Graph from './components/Graph/Graph';
 
 import './App.css';
 
@@ -31,6 +32,9 @@ class App extends Component<{}, { isLoading: boolean }> {
             className='block-list-container'
             toggleLoading={this.toggleLoading}
           />
+        </Route>
+        <Route exact path='/btc/chart'>
+            <Graph/>
         </Route>
         <Route exact path='/about'>
           <About/>
