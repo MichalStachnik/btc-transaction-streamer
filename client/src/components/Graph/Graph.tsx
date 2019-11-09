@@ -36,7 +36,17 @@ class Graph extends Component<{}, State> {
   }
 
   componentDidMount = async () => {
-    const data = await fetch('http://localhost:4000/btc/transaction-hash');
+    console.log('mounted graph');
+    const port = process.env.PORT;
+    console.log('port', process.env.PORT);
+    let url = '';
+    if (port) {
+      url = `https://quiet-mesa-29386.herokuapp.com`;
+    } else {
+      url = 'http://localhost:4000';
+    }
+    const data = await fetch(`${url}/btc/transaction-hash`);
+    console.log('our final url', url);
     const parsedData = await data.json();
     const parsedJSON = JSON.parse(parsedData.data);
     console.log('parsedJSON', parsedJSON);
