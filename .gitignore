@@ -1,3 +1,8 @@
 /server/node_modules
 /client/node_modules
 /client/build
+<<<<<<< HEAD
+=======
+node_modules
+build
+>>>>>>> 14b49a82205d44a808be4af778ceef2b69bd4ae4
