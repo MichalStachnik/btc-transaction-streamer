@@ -21,6 +21,9 @@ class NavItem extends Component<{ name: string }, { navItemClass: string }> {
   };
 
   render() {
+    const streamUrl = `/${this.props.name}/transaction-stream`;
+    const chartUrl = `/${this.props.name}/chart`;
+
     return (
       <div
         className="nav-item"
@@ -30,12 +33,12 @@ class NavItem extends Component<{ name: string }, { navItemClass: string }> {
         <div>{this.props.name}</div>
         <ul className={this.state.navItemClass}>
           <li>
-            <NavLink exact to="/">
+            <NavLink exact to={streamUrl}>
               Transaction Stream
             </NavLink>
           </li>
           <li>
-            <NavLink exact to="/btc/chart">
+            <NavLink exact to={chartUrl}>
               Hash Rate
             </NavLink>
           </li>
