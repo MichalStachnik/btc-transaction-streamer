@@ -4,8 +4,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #F2F2F2;
+  color: #f2f2f2;
   background: #262626;
+  z-index: 2;
 }
 
 svg {
@@ -27,50 +28,62 @@ svg {
 }
 
 nav {
-  flex-basis:  25%;
+  flex-basis: 45%;
   display: flex;
   justify-content: space-between;
   margin-right: 2.5%;
 }
 
-a {
-  width: 40%;
-  height: 30px;
-  color: #F2F2F2;
+.nav-item div {
+  height: 50%;
+  width: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+}
+
+.nav-item .about-link {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #f2f2f2;
   text-decoration: none;
-  border: 1px solid #F2F2F2;
-  border-radius: 4px;
-  transition: 0.3s all ease-in-out
 }
 
-a:hover {
-  color: #262626;
-  background: #F2F2F2;
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0 5px;
+  height: 0%;
+  overflow: hidden;
+  background: white;
+  transition: 0.3s height ease-in-out;
 }
 
-a.active {
-  color: #262626;
-  background: #F2F2F2;
+ul.menu-open {
+  height: 100%;
 }
 
+li {
+  color: black;
+}
 
 @keyframes loader {
   0% {
-    fill: #F2F2F2;
+    fill: #f2f2f2;
   }
   20% {
-    fill: #30BFBF;
+    fill: #30bfbf;
   }
   50% {
-    fill: #30BFBF;
+    fill: #30bfbf;
   }
   70% {
-    fill: #F2F2F2;
+    fill: #f2f2f2;
   }
   100% {
-    fill: #F2F2F2;
+    fill: #f2f2f2;
   }
 }
