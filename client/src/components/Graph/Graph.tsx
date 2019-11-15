@@ -36,10 +36,8 @@ class Graph extends Component<{}, State> {
   }
 
   componentDidMount = async () => {
-    console.log('mounted graph');
-
+    // TODO: refactor
     const data = await fetch('/btc/transaction-hash');
-    console.log('after fetching');
     const parsedData = await data.json();
     const parsedJSON = JSON.parse(parsedData.data);
     console.log('parsedJSON', parsedJSON);

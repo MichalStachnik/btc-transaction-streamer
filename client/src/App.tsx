@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 import Header from './components/Header/Header';
+import Transaction from './components/Transaction/Transaction';
 import BlockList from './components/BlockList/BlockList';
 import About from './components/About/About';
 import Graph from './components/Graph/Graph';
@@ -25,6 +26,9 @@ class App extends Component<{}, { isLoading: boolean }> {
     return (
       <div className="App">
         <Header isLoading={this.state.isLoading} />
+        <Route exact path="/transaction/:transactionHash">
+          <Transaction />
+        </Route>
         <Redirect from="/" exact to="/btc/transaction-stream" />
         <Route exact path="/btc/transaction-stream">
           <BlockList
