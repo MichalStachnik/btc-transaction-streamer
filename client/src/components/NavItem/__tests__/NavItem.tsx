@@ -1,12 +1,10 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-import About from '../About';
-
-
+import NavItem from '../NavItem';
 
 let div: any = null;
 beforeEach(() => {
-  div = document.createElement("div");
+  div = document.createElement('div');
   document.body.appendChild(div);
 });
 
@@ -17,6 +15,6 @@ afterEach(() => {
 });
 
 it('renders without crashing', () => {
-  render(<About/>, div);
+  render(<NavItem name="test name"></NavItem>, div);
   expect(div).toBeTruthy();
 });
