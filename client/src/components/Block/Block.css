@@ -95,8 +95,10 @@
   align-items: center;
   justify-content: center;
   color: #f2f2f2;
-  background: linear-gradient(45deg, #262626, #30bfbf85, #262626);
-  background: linear-gradient(180deg, #262626, #30bfbf85);
+  background: linear-gradient(to right, #aa4b6b, #6b6b83, #3b8d99);
+  /* background: linear-gradient(to right, #355c7d, #6c5b7b, #c06c84); */
+  /* background: linear-gradient(to right, #3e5151, #decba4); */
+  /* background: linear-gradient(to right, #fc5c7d, #6a82fb); */
   border-radius: 4px;
 }
 
@@ -123,8 +125,4 @@
 .block-footer svg {
   margin-left: 5px;
   transform: rotate(-14deg);
-}
-
-.block-footer svg path {
-  fill: #f2636f;
 }
