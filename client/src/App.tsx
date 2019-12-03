@@ -26,10 +26,12 @@ class App extends Component<{}, { isLoading: boolean }> {
     return (
       <div className="App">
         <Header isLoading={this.state.isLoading} />
-        <Route exact path="/transaction/:transactionHash">
-          <Transaction />
-        </Route>
         <Redirect from="/" exact to="/btc/transaction-stream" />
+        <Route
+          exact
+          path="/transaction/:transactionHash"
+          component={Transaction}
+        />
         <Route exact path="/btc/transaction-stream">
           <BlockList
             className="block-list-container"
@@ -39,15 +41,11 @@ class App extends Component<{}, { isLoading: boolean }> {
         <Route exact path="/eth/transaction-stream">
           Coming soon...
         </Route>
-        <Route exact path="/btc/chart">
-          <Graph />
-        </Route>
+        <Route exact path="/btc/chart" component={Graph} />
         <Route exact path="/eth/chart">
           Coming soon...
         </Route>
-        <Route exact path="/about">
-          <About />
-        </Route>
+        <Route exact path="/about" component={About} />
       </div>
     );
   }

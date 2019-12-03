@@ -1,35 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './SearchInput.css';
 
-const SearchInput = () => {
-  const [value, setValue] = useState('');
-  const history = useHistory();
+interface Props {}
+interface State {
+  value: string;
+}
 
-  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+class SearchInput extends React.Component<Props, State> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      value: ''
+    };
+  }
+
+  handleSearchChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ value: evt.target.value });
+  };
+
+  handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
   };
 
-  const handleSearchChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(evt.target.value);
-  };
-
-  // Fires everytime value is changed
-  useEffect(() => {
-    if (value.length === 64) {
-      history.push(`/transaction/${value}`);
-    }
-  }, [value]);
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Search Transaction:
-        <input onChange={handleSearchChange} value={value} type="text" />
-      </label>
-    </form>
-  );
-};
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input
+          onChange={this.handleSearchChange}
+          value={this.state.value}
+          name="searchValue"
+          type="text"
+        />
+        <button type="submit" disabled={this.state.value.length !== 64}>
+          <Link
+            style={{
+              pointerEvents: this.state.value.length === 64 ? 'unset' : 'none'
+            }}
+            to={`/transaction/${this.state.value}`}
+          >
+            Search
+          </Link>
+        </button>
+      </form>
+    );
+  }
+}
 
 export default SearchInput;
