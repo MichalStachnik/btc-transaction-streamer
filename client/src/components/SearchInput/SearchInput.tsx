@@ -26,21 +26,31 @@ class SearchInput extends React.Component<Props, State> {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="search-form" onSubmit={this.handleSubmit}>
         <input
           onChange={this.handleSearchChange}
           value={this.state.value}
           name="searchValue"
           type="text"
+          placeholder="search transaction"
+          className="search-input"
         />
-        <button type="submit" disabled={this.state.value.length !== 64}>
+        <button
+          className="search-button"
+          style={{
+            cursor: this.state.value.length < 64 ? 'not-allowed' : 'pointer'
+          }}
+          type="submit"
+          disabled={this.state.value.length !== 64}
+        >
           <Link
             style={{
               pointerEvents: this.state.value.length === 64 ? 'unset' : 'none'
             }}
             to={`/transaction/${this.state.value}`}
           >
-            Search
+            <i className="fa fa-search"></i>
+            <span>{64 - this.state.value.length}</span>
           </Link>
         </button>
       </form>

@@ -24,7 +24,7 @@ ul {
   transition: 0.3s height ease-in-out;
 }
 
-ul.open {
+.nav-item:hover ul {
   height: 100%;
 }
 

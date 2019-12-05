@@ -36,7 +36,9 @@ class Header extends Component<Props, State> {
   render() {
     return (
       <header className="header">
-        <LogoSvg className={this.props.isLoading ? 'is-loading' : ''} />
+        <NavLink exact to="/btc/transaction-stream">
+          <LogoSvg className={this.props.isLoading ? 'is-loading' : ''} />
+        </NavLink>
         <div className="search">
           <SearchInput />
         </div>
