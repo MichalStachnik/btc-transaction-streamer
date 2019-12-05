@@ -2,14 +2,31 @@ import React, { Component } from 'react';
 
 import Input from '../Input/Input';
 import Output from '../Output/Output';
-import { ReactComponent as InputSvg } from '../../assets/input.svg';
-import { ReactComponent as OutputSvg } from '../../assets/output.svg';
-import { ReactComponent as BtcSvg } from '../../assets/btc.svg';
 
 import './Block.css';
 
-class Block extends Component<{ block: any }, {}> {
-  render() {
+class Block extends Component<
+  { block: any },
+  {
+    inputs: any[];
+    outputs: any[];
+    hash: string;
+    timeOutput: string;
+    totalAmount: number;
+  }
+> {
+  constructor(props: any) {
+    super(props);
+
+    this.state = {
+      inputs: [],
+      outputs: [],
+      hash: '',
+      timeOutput: '',
+      totalAmount: 0
+    };
+  }
+  componentDidMount = () => {
     let blockAsJSON = JSON.parse(this.props.block);
     let hash: string = blockAsJSON.x.hash;
     let time: Date = new Date(blockAsJSON.x.time * 1000);
@@ -23,38 +40,64 @@ class Block extends Component<{ block: any }, {}> {
       0
     );
 
+    this.setState({
+      inputs,
+      outputs,
+      hash,
+      timeOutput,
+      totalAmount
+    });
+  };
+
+  handleCopyClick = () => {
+    navigator.clipboard.writeText(this.state.hash).then(
+      () => {
+        console.log(`clip set with ${this.state.hash}`);
+      },
+      () => {
+        console.warn('clip err');
+      }
+    );
+  };
+
+  render() {
     return (
       <div className="block">
         <div className="block-inputs-container">
           <div className="block-inputs-cover">
-            <InputSvg />
+            {/* <InputSvg /> */}
+            <i className="fa fa-level-down-alt"></i>
             <p>Inputs</p>
           </div>
           <div className="block-inputs-content">
-            {inputs.map((input, index) => (
+            {this.state.inputs.map((input, index) => (
               <Input input={input} key={index} />
             ))}
           </div>
         </div>
         <div className="block-outputs-container">
           <div className="block-outputs-cover">
-            <OutputSvg />
+            {/* <OutputSvg /> */}
+            <i className="fa fa-level-up-alt"></i>
             <p>Outputs</p>
           </div>
           <div className="block-outputs-content">
-            {outputs.map((output, index) => (
+            {this.state.outputs.map((output, index) => (
               <Output output={output} key={index} />
             ))}
           </div>
         </div>
         <div className="block-footer">
           <div className="block-footer-left">
-            <span className="block-hash">{hash}</span>
-            <span className="block-time">{timeOutput}</span>
+            <span className="block-hash">
+              {this.state.hash}
+              <i className="far fa-copy" onClick={this.handleCopyClick}></i>
+            </span>
+            <span className="block-time">{this.state.timeOutput}</span>
           </div>
           <div className="block-footer-right">
-            <span>Total amount transacted {totalAmount}</span>
-            <BtcSvg />
+            <span>Total amount transacted: {this.state.totalAmount}</span>
+            <i className="fab fa-btc"></i>
           </div>
         </div>
       </div>
