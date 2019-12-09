@@ -1,14 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
+
+import { SearchValueContext } from '../../contexts/SearchValueContext';
 
 import './SearchInput.css';
 
-interface Props {}
+interface Props {
+  history: any;
+}
 interface State {
   value: string;
 }
 
-class SearchInput extends React.Component<Props, State> {
+class SearchInput extends React.Component<Props & RouteComponentProps, State> {
+  static contextType = SearchValueContext;
   constructor(props: any) {
     super(props);
     this.state = {
@@ -17,7 +22,14 @@ class SearchInput extends React.Component<Props, State> {
   }
 
   handleSearchChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ value: evt.target.value });
+    this.context.changeSearchValue(evt.target.value);
+    this.setState({ value: evt.target.value }, () => {
+      if (this.state.value.length === 64) {
+        this.props.history.push(`/transaction/${this.state.value}`);
+      } else if (this.state.value.length === 0) {
+        this.props.history.push('/btc/transaction-stream');
+      }
+    });
   };
 
   handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
@@ -58,4 +70,4 @@ class SearchInput extends React.Component<Props, State> {
   }
 }
 
-export default SearchInput;
+export default withRouter(SearchInput);

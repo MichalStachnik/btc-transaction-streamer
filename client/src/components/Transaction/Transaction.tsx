@@ -1,26 +1,9 @@
 import React from 'react';
-// import { useParams } from 'react-router-dom';
 import { RouteProps } from 'react-router';
 
+import { SearchValueContext } from '../../contexts/SearchValueContext';
+
 import './Transaction.css';
-
-// const Transaction: React.FC = () => {
-//   let { transactionHash } = useParams();
-
-//   console.log('about to fetch');
-//   fetch(`/search/${transactionHash}`)
-//     .then(res => {
-//       console.log('res', res);
-//     })
-//     .catch(err => console.warn(err));
-
-//   return (
-//     <div className="transaction">
-//       <p>transaction</p>
-//       <p>{transactionHash}</p>
-//     </div>
-//   );
-// };
 
 interface Props {
   match: any;
@@ -33,6 +16,7 @@ interface State {
 }
 
 class Transaction extends React.Component<Props & RouteProps, State> {
+  static contextType = SearchValueContext;
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -42,11 +26,14 @@ class Transaction extends React.Component<Props & RouteProps, State> {
     };
   }
   componentDidMount = async () => {
-    const { transactionHash } = this.props.match.params;
-    const data = await fetch(`/search/${transactionHash}`);
+    const { searchValue } = this.context;
+    const data = await fetch(`/search/${searchValue}`);
     const parsedData = await data.json();
-    console.log(parsedData);
-    this.setState({ hash: parsedData.data.hash });
+    this.setState({
+      hash: parsedData.data.hash,
+      inputs: parsedData.data.inputs,
+      outputs: parsedData.data.outputs
+    });
   };
   render() {
     return (

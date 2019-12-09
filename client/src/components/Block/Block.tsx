@@ -1,20 +1,27 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import Input from '../Input/Input';
 import Output from '../Output/Output';
 
+import { SearchValueContext } from '../../contexts/SearchValueContext';
+
 import './Block.css';
 
-class Block extends Component<
-  { block: any },
-  {
-    inputs: any[];
-    outputs: any[];
-    hash: string;
-    timeOutput: string;
-    totalAmount: number;
-  }
-> {
+interface Props {
+  block: any;
+}
+
+interface State {
+  inputs: any[];
+  outputs: any[];
+  hash: string;
+  timeOutput: string;
+  totalAmount: number;
+}
+
+class Block extends Component<Props, State> {
+  static contextType = SearchValueContext;
   constructor(props: any) {
     super(props);
 
@@ -35,10 +42,29 @@ class Block extends Component<
     let inputs: any[] = blockAsJSON.x.inputs;
     let outputs: any[] = blockAsJSON.x.out;
 
-    const totalAmount: number = outputs.reduce(
+    let totalAmount: number = outputs.reduce(
       (accumulator, current) => accumulator + current.value,
       0
     );
+
+    let totalAmountAsString = totalAmount.toString();
+
+    const totalAmountLength = totalAmountAsString.length;
+    if (totalAmountLength < 10) {
+      const numZerosToAdd = 8 - totalAmountLength;
+      for (let i = 0; i < numZerosToAdd; i++) {
+        totalAmountAsString = `0${totalAmountAsString}`;
+        if (i + 1 === numZerosToAdd) {
+          totalAmountAsString = `0.${totalAmountAsString}`;
+        }
+      }
+    } else if (totalAmountLength === 10) {
+      let rightSide = totalAmountAsString.substr(2);
+      let leftSide = totalAmountAsString.substr(0, 2);
+      totalAmountAsString = `${leftSide}.${rightSide}`;
+    }
+
+    totalAmount = Number.parseFloat(totalAmountAsString);
 
     this.setState({
       inputs,
@@ -52,7 +78,7 @@ class Block extends Component<
   handleCopyClick = () => {
     navigator.clipboard.writeText(this.state.hash).then(
       () => {
-        console.log(`clip set with ${this.state.hash}`);
+        console.info(`clip set with ${this.state.hash}`);
       },
       () => {
         console.warn('clip err');
@@ -60,45 +86,49 @@ class Block extends Component<
     );
   };
 
+  handleHashClick = () => {
+    this.context.changeSearchValue(this.state.hash);
+  };
+
   render() {
     return (
-      <div className="block">
-        <div className="block-inputs-container">
-          <div className="block-inputs-cover">
-            {/* <InputSvg /> */}
-            <i className="fa fa-level-down-alt"></i>
-            <p>Inputs</p>
-          </div>
-          <div className="block-inputs-content">
+      <div className="Block">
+        <div className="header">
+          <span className="block-hash">
+            <Link
+              to={`/transaction/${this.state.hash}`}
+              onClick={this.handleHashClick}
+            >
+              {this.state.hash}
+            </Link>
+            <i className="far fa-copy" onClick={this.handleCopyClick}></i>
+          </span>
+        </div>
+        <div className="inputs">
+          <p>Inputs</p>
+          <ul>
             {this.state.inputs.map((input, index) => (
               <Input input={input} key={index} />
             ))}
-          </div>
+          </ul>
         </div>
-        <div className="block-outputs-container">
-          <div className="block-outputs-cover">
-            {/* <OutputSvg /> */}
-            <i className="fa fa-level-up-alt"></i>
-            <p>Outputs</p>
-          </div>
-          <div className="block-outputs-content">
+        <div className="center">
+          <i className="fa fa-long-arrow-alt-right"></i>
+        </div>
+        <div className="outputs">
+          <p>Outputs</p>
+          <ul>
             {this.state.outputs.map((output, index) => (
               <Output output={output} key={index} />
             ))}
-          </div>
+          </ul>
         </div>
-        <div className="block-footer">
-          <div className="block-footer-left">
-            <span className="block-hash">
-              {this.state.hash}
-              <i className="far fa-copy" onClick={this.handleCopyClick}></i>
-            </span>
-            <span className="block-time">{this.state.timeOutput}</span>
-          </div>
-          <div className="block-footer-right">
-            <span>Total amount transacted: {this.state.totalAmount}</span>
+        <div className="footer">
+          <span className="block-time">{this.state.timeOutput}</span>
+          <span>
+            Total amount transacted: {this.state.totalAmount}
             <i className="fab fa-btc"></i>
-          </div>
+          </span>
         </div>
       </div>
     );
