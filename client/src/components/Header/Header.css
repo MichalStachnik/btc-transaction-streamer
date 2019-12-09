@@ -1,4 +1,4 @@
-.header {
+.Header {
   width: 100%;
   height: 60px;
   color: #f2f2f2;
@@ -7,44 +7,34 @@
   display: grid;
   grid-template-columns: 1fr 2fr 3fr;
   grid-gap: 1rem;
-  /* grid-template-areas: 'logo search nav nav'; */
 }
 
-.header svg {
-  /* grid-area: logo; */
-}
-
-.search {
-  /* display: flex;
-  align-items: center;
-  flex: 1; */
-  /* grid-area: search; */
+.Header .search {
   width: 100%;
   height: 40px;
   place-self: center;
 }
 
-.is-loading .loader-one {
+.Header .is-loading .loader-one {
   animation: loader 6s infinite;
 }
 
-.is-loading .loader-two {
+.Header .is-loading .loader-two {
   animation: loader 6s infinite;
   animation-delay: 1s;
 }
 
-.is-loading .loader-three {
+.Header .is-loading .loader-three {
   animation: loader 6s infinite;
   animation-delay: 2s;
 }
 
-nav {
-  /* grid-area: nav; */
+.Header nav {
   display: flex;
   justify-content: space-between;
 }
 
-.nav-item div {
+.Header .nav-item div {
   height: 50%;
   width: 100%;
   display: flex;
@@ -52,7 +42,7 @@ nav {
   align-items: center;
 }
 
-.nav-item .about-link {
+.Header .nav-item .about-link {
   height: 50%;
   width: 100%;
   display: flex;
@@ -60,24 +50,6 @@ nav {
   align-items: center;
   color: #f2f2f2;
   text-decoration: none;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0 5px;
-  height: 0%;
-  overflow: hidden;
-  background: white;
-  transition: 0.3s height ease-in-out;
-}
-
-ul.menu-open {
-  height: 100%;
-}
-
-li {
-  color: black;
 }
 
 @keyframes loader {

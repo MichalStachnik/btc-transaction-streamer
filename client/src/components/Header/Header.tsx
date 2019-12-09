@@ -13,7 +13,6 @@ interface Props {
 
 interface State {
   marketCap: number;
-  menuClass: string;
 }
 
 class Header extends Component<Props, State> {
@@ -21,8 +20,7 @@ class Header extends Component<Props, State> {
     super(props);
 
     this.state = {
-      marketCap: 0,
-      menuClass: ''
+      marketCap: 0
     };
   }
 
@@ -35,7 +33,7 @@ class Header extends Component<Props, State> {
 
   render() {
     return (
-      <header className="header">
+      <header className="Header">
         <NavLink exact to="/btc/transaction-stream">
           <LogoSvg className={this.props.isLoading ? 'is-loading' : ''} />
         </NavLink>

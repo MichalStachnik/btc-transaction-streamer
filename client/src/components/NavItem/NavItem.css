@@ -8,9 +8,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
-ul {
+.nav-item div::before {
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  display: block;
+  background-color: #fff;
+  content: ' ';
+  top: 0;
+  left: 50%;
+  transition: all 0.4s ease-in-out;
+}
+
+.nav-item:hover div::before {
+  width: 70%;
+  left: 15%;
+}
+
+.nav-item ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -28,7 +46,7 @@ ul {
   height: 100%;
 }
 
-li a {
+.nav-item li a {
   color: black;
   font-size: 12px;
 }
