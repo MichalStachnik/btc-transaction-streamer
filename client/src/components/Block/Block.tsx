@@ -125,7 +125,7 @@ class Block extends Component<Props, State> {
         </div>
         <div className="footer">
           <span className="block-time">{this.state.timeOutput}</span>
-          <span>
+          <span className="total-amount">
             Total amount transacted: {this.state.totalAmount}
             <i className="fab fa-btc"></i>
           </span>
