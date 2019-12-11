@@ -49,21 +49,35 @@ class Block extends Component<Props, State> {
 
     let totalAmountAsString = totalAmount.toString();
 
+    let totalAmountAsArray = totalAmountAsString.split('');
+    // console.log('HERE', totalAmountAsArray);
+    // ONE SAT = 0.00000001
+    // for length of our sats
+    // keep adding onto end until no more
+    let myOutput = [];
+
+    totalAmountAsArray.forEach(num => {
+      myOutput.push(num);
+    });
+
     const totalAmountLength = totalAmountAsString.length;
-    if (totalAmountLength < 10) {
+    if (totalAmountLength < 8) {
       const numZerosToAdd = 8 - totalAmountLength;
+      if (numZerosToAdd === 0) {
+        totalAmountAsString = `0.${totalAmountAsString}`;
+      }
+
       for (let i = 0; i < numZerosToAdd; i++) {
         totalAmountAsString = `0${totalAmountAsString}`;
         if (i + 1 === numZerosToAdd) {
           totalAmountAsString = `0.${totalAmountAsString}`;
         }
       }
-    } else if (totalAmountLength === 10) {
+    } else if (totalAmountLength > 8) {
       let rightSide = totalAmountAsString.substr(2);
       let leftSide = totalAmountAsString.substr(0, 2);
       totalAmountAsString = `${leftSide}.${rightSide}`;
     }
-
     totalAmount = Number.parseFloat(totalAmountAsString);
 
     this.setState({
@@ -78,6 +92,7 @@ class Block extends Component<Props, State> {
   handleCopyClick = () => {
     navigator.clipboard.writeText(this.state.hash).then(
       () => {
+        // TODO: Add copied toast
         console.info(`clip set with ${this.state.hash}`);
       },
       () => {
