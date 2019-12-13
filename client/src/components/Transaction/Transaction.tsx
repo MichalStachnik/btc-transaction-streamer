@@ -1,5 +1,6 @@
 import React from 'react';
 import { RouteProps } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import { SearchValueContext } from '../../contexts/SearchValueContext';
 
@@ -23,6 +24,7 @@ class Transaction extends React.Component<Props & RouteProps, State> {
       outputs: []
     };
   }
+
   componentDidMount = async () => {
     const { searchValue } = this.context;
     const data = await fetch(`/search/${searchValue}`);
@@ -34,13 +36,25 @@ class Transaction extends React.Component<Props & RouteProps, State> {
       outputs: parsedData.data.outputs
     });
   };
+
+  handleHashClick = () => {
+    this.context.changeSearchValue(this.state.hash);
+  };
+
   render() {
     if (!this.state.hash) {
-      return <div className="loading">LOADING</div>;
+      return <div className="loading"></div>;
     } else {
       return (
         <div>
-          <p>{this.state.hash}</p>
+          <p>
+            <Link
+              to={`/transaction/${this.state.hash}`}
+              onClick={this.handleHashClick}
+            >
+              {this.state.hash}
+            </Link>
+          </p>
           <h3>Inputs:</h3>
           <ul>
             {this.state.inputs.map(input => {
