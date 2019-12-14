@@ -20,7 +20,7 @@
   grid-area: header;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .Block .header a {
@@ -42,6 +42,8 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
 }
 
 .Block .center {
@@ -56,6 +58,8 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
 }
 
 .Block ul {

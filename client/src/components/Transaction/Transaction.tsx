@@ -27,6 +27,19 @@ class Transaction extends React.Component<Props & RouteProps, State> {
 
   componentDidMount = async () => {
     const { searchValue } = this.context;
+    this.fetchTransactionAndSetState(searchValue);
+  };
+
+  componentDidUpdate = async () => {
+    // Check if searchValue in context has changed
+    // If so, fetch new transaction
+    const { searchValue } = this.context;
+    if (searchValue !== this.state.hash) {
+      this.fetchTransactionAndSetState(searchValue);
+    }
+  };
+
+  fetchTransactionAndSetState = async (searchValue: string) => {
     const data = await fetch(`/search/${searchValue}`);
     const parsedData = await data.json();
 
@@ -37,47 +50,54 @@ class Transaction extends React.Component<Props & RouteProps, State> {
     });
   };
 
-  handleHashClick = () => {
-    this.context.changeSearchValue(this.state.hash);
+  handleHashClick = (prevHash: any) => {
+    this.context.changeSearchValue(prevHash);
   };
 
   render() {
-    if (!this.state.hash) {
+    if (this.state.hash !== this.context.searchValue) {
       return <div className="loading"></div>;
     } else {
       return (
-        <div>
-          <p>
-            <Link
-              to={`/transaction/${this.state.hash}`}
-              onClick={this.handleHashClick}
-            >
-              {this.state.hash}
-            </Link>
-          </p>
-          <h3>Inputs:</h3>
-          <ul>
-            {this.state.inputs.map(input => {
-              return (
-                <li>
-                  <p>address: {input.addresses[0]}</p>
-                  <p>previos hash: {input.prev_hash}</p>
-                  <p>value: {input.output_value}</p>
-                </li>
-              );
-            })}
-          </ul>
-          <h3>Outputs:</h3>
-          <ul>
-            {this.state.outputs.map(output => {
-              return (
-                <li>
-                  <p>address: {output.addresses[0]}</p>
-                  <p>value: {output.value}</p>
-                </li>
-              );
-            })}
-          </ul>
+        <div className="Transaction">
+          <h2 className="hash">{this.state.hash}</h2>
+          <div className="inputs">
+            <h3>Inputs:</h3>
+            <ul>
+              {this.state.inputs.map((input: any, index: number) => {
+                return (
+                  <li key={index}>
+                    <p>address: {input.addresses[0]}</p>
+                    <p>
+                      previous hash:
+                      <Link
+                        to={`/transaction/${input.prev_hash}`}
+                        onClick={() => this.handleHashClick(input.prev_hash)}
+                      >
+                        {input.prev_hash}
+                      </Link>
+                    </p>
+                    <p>value: {input.output_value}</p>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <div className="outputs">
+            <h3>Outputs:</h3>
+            <ul>
+              {this.state.outputs.map((output: any, index: number) => {
+                return (
+                  <li key={index}>
+                    {output.addresses[0] && (
+                      <p>address: {output.addresses[0]}</p>
+                    )}
+                    <p>value: {output.value}</p>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       );
     }

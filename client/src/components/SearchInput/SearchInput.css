@@ -6,6 +6,7 @@
 
 .search-form .search-input {
   flex: 1;
+  padding-left: 5px;
   outline: none;
   border-bottom-left-radius: 3px;
   border-top-left-radius: 3px;
@@ -16,6 +17,7 @@
 .search-form .search-button {
   background: #536976;
   border: 0;
+  padding: 10px;
   border-bottom-right-radius: 3px;
   border-top-right-radius: 3px;
   transition: 0.2s all ease-in-out;

@@ -1,3 +1,25 @@
+.Transaction {
+  width: 98vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 30px auto;
+  grid-gap: 1vw;
+  grid-template-areas:
+    'hash hash'
+    'inputs outputs';
+}
+
+.Transaction .hash {
+  grid-area: hash;
+  place-self: center;
+}
+.Transaction .inputs {
+  grid-area: inputs;
+}
+.Transaction .outputs {
+  grid-area: outputs;
+}
+
 .loading:before {
   content: '';
   box-sizing: border-box;

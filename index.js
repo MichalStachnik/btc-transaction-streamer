@@ -16,7 +16,6 @@ app.get('/btc/transaction-hash', (req, res) => {
 });
 
 app.get('/search/:hash', (req, res) => {
-  console.log('got on the server req.params.hash', req.params.hash);
   const transactionHash = req.params.hash;
   axios
     .get(`https://api.blockcypher.com/v1/btc/main/txs/${transactionHash}`)
