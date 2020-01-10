@@ -5,7 +5,7 @@
   background: #262626;
   z-index: 2;
   display: grid;
-  grid-template-columns: 1fr 2fr 3fr;
+  grid-template-columns: 1fr 4fr 3fr;
   grid-gap: 1rem;
 }
 

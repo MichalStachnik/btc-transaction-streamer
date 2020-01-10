@@ -1,4 +1,4 @@
-.Block {
+.transaction-card {
   background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
   width: 95%;
   max-width: 95%;
@@ -16,14 +16,14 @@
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
 }
 
-.Block .header {
+.transaction-card .header {
   grid-area: header;
   display: flex;
   justify-content: center;
   align-items: flex-start;
 }
 
-.Block .header a {
+.transaction-card .header a {
   color: unset;
   text-decoration: none;
   margin-right: 5px;
@@ -32,12 +32,12 @@
   border-radius: 3px;
 }
 
-.Block .header a:hover {
+.transaction-card .header a:hover {
   color: #262626;
   background: #f2f2f2;
 }
 
-.Block .inputs {
+.transaction-card .inputs {
   grid-area: inputs;
   display: flex;
   justify-content: space-around;
@@ -46,14 +46,14 @@
   border-radius: 4px;
 }
 
-.Block .center {
+.transaction-card .center {
   grid-area: center;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.Block .outputs {
+.transaction-card .outputs {
   grid-area: outputs;
   display: flex;
   justify-content: space-around;
@@ -62,25 +62,25 @@
   border-radius: 4px;
 }
 
-.Block ul {
+.transaction-card ul {
   padding: 0;
   margin: 0;
   height: 100%;
   overflow: hidden;
 }
 
-.Block ul:hover {
+.transaction-card ul:hover {
   overflow-y: scroll;
 }
 
-.Block .footer {
+.transaction-card .footer {
   grid-area: footer;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
 }
 
-.Block .footer .total-amount i {
+.transaction-card .footer .total-amount i {
   margin-left: 5px;
 }
 

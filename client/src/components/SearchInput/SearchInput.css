@@ -4,14 +4,29 @@
   justify-content: space-between;
 }
 
-.search-form .search-input {
+.search-form .input-container {
   flex: 1;
+  position: relative;
+}
+
+/* icon is 16px in height */
+.search-form .input-container i {
+  position: absolute;
+  top: calc(50% - 8px);
+  right: 10px;
+  color: #292e49;
+  cursor: pointer;
+}
+
+.search-form .search-input {
+  width: 100%;
+  height: 100%;
   padding-left: 5px;
   outline: none;
   border-bottom-left-radius: 3px;
   border-top-left-radius: 3px;
   border-color: transparent;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .search-form .search-button {

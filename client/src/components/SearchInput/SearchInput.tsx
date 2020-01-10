@@ -36,17 +36,29 @@ class SearchInput extends React.Component<Props & RouteComponentProps, State> {
     evt.preventDefault();
   };
 
+  handleClearClick = () => {
+    // change context and value to ''
+    this.context.changeSearchValue('');
+    this.setState({ value: '' });
+    this.props.history.push('/btc/transaction-stream');
+  };
+
   render() {
     return (
       <form className="search-form" onSubmit={this.handleSubmit}>
-        <input
-          onChange={this.handleSearchChange}
-          value={this.state.value}
-          name="searchValue"
-          type="text"
-          placeholder="search transaction"
-          className="search-input"
-        />
+        <div className="input-container">
+          <input
+            onChange={this.handleSearchChange}
+            value={this.state.value}
+            name="searchValue"
+            type="text"
+            placeholder="search transaction"
+            className="search-input"
+          />
+          {this.state.value.length > 0 && (
+            <i className="fa fa-times" onClick={this.handleClearClick}></i>
+          )}
+        </div>
         <button
           className="search-button"
           style={{

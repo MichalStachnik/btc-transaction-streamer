@@ -6,7 +6,7 @@ import Output from '../Output/Output';
 
 import { SearchValueContext } from '../../contexts/SearchValueContext';
 
-import './Block.css';
+import './TransactionCard.css';
 
 interface Props {
   block: any;
@@ -20,7 +20,7 @@ interface State {
   totalAmount: number;
 }
 
-class Block extends Component<Props, State> {
+class TransactionCard extends Component<Props, State> {
   static contextType = SearchValueContext;
   constructor(props: any) {
     super(props);
@@ -107,7 +107,7 @@ class Block extends Component<Props, State> {
 
   render() {
     return (
-      <div className="Block">
+      <div className="transaction-card">
         <div className="header">
           <span className="block-hash">
             <Link
@@ -150,4 +150,4 @@ class Block extends Component<Props, State> {
   }
 }
 
-export default Block;
+export default TransactionCard;

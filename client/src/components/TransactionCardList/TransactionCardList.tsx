@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import Block from '../Block/Block';
+import TransactionCard from '../TransactionCard/TransactionCard';
 
-import './BlockList.css';
+import './TransactionCardList.css';
 
-class BlockList extends Component<
+class TransactionCardList extends Component<
   { toggleLoading: any } & { className: string },
   { transactionStream: any[] }
 > {
@@ -30,7 +30,7 @@ class BlockList extends Component<
     this.WS.onmessage = event => {
       // let performance: any = window.performance;
       // console.log(performance.memory);
-      // Add one event to array
+      // Create new array and one event
       this.setState(
         (prevState, prevProps) => {
           return {
@@ -55,13 +55,13 @@ class BlockList extends Component<
 
   render() {
     return (
-      <div className="block-list">
+      <div className="transaction-card-list">
         {this.state.transactionStream.map((block, index) => (
-          <Block block={block} key={index} />
+          <TransactionCard block={block} key={index} />
         ))}
       </div>
     );
   }
 }
 
-export default BlockList;
+export default TransactionCardList;

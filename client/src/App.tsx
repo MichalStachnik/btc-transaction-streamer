@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 import Header from './components/Header/Header';
 import Transaction from './components/Transaction/Transaction';
-import BlockList from './components/BlockList/BlockList';
+import TransactionCardList from './components/TransactionCardList/TransactionCardList';
 import About from './components/About/About';
 import Graph from './components/Graph/Graph';
 
@@ -36,8 +36,8 @@ class App extends Component<{}, { isLoading: boolean }> {
             component={Transaction}
           />
           <Route exact path="/btc/transaction-stream">
-            <BlockList
-              className="block-list-container"
+            <TransactionCardList
+              className="transaction-card-list-container"
               toggleLoading={this.toggleLoading}
             />
           </Route>
