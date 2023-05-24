@@ -37,7 +37,7 @@ class Graph extends Component<{}, State> {
 
   componentDidMount = async () => {
     // TODO: refactor
-    const data = await fetch('/btc/transaction-hash');
+    const data = await fetch('/btc/hash-rate');
     const parsedData = await data.json();
     const parsedJSON = JSON.parse(parsedData.data);
     console.log('parsedJSON', parsedJSON);

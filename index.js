@@ -4,7 +4,7 @@ const path = require('path');
 
 const app = express();
 
-app.get('/btc/transaction-hash', (req, res) => {
+app.get('/btc/hash-rate', (req, res) => {
   // TODO: change headers
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   axios

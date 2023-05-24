@@ -5,7 +5,7 @@ import TransactionCard from '../TransactionCard/TransactionCard';
 import './TransactionCardList.css';
 
 class TransactionCardList extends Component<
-  { toggleLoading: any } & { className: string } & { isLoading: boolean },
+  { toggleLoading: any } & { className: string },
   { transactionStream: any[] }
 > {
   constructor(props: any) {
@@ -39,7 +39,6 @@ class TransactionCardList extends Component<
           if (this.state.transactionStream.length === 100) {
             console.log('closing web socket :(');
             this.WS.close();
-            this.props.toggleLoading();
           }
         }
       );
@@ -51,10 +50,12 @@ class TransactionCardList extends Component<
   };
 
   render() {
-    if (this.props.isLoading) {
-      <div>
-        <h1>Loading...</h1>
-      </div>
+    if (this.state.transactionStream.length === 0) {
+      return (
+        <div>
+          <h1>Loading...</h1>
+        </div>
+      )
     }
     return (
       <div className="transaction-card-list">
