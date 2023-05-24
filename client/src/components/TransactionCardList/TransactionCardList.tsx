@@ -5,7 +5,7 @@ import TransactionCard from '../TransactionCard/TransactionCard';
 import './TransactionCardList.css';
 
 class TransactionCardList extends Component<
-  { toggleLoading: any } & { className: string },
+  { toggleLoading: any } & { className: string } & { isLoading: boolean },
   { transactionStream: any[] }
 > {
   constructor(props: any) {
@@ -20,7 +20,6 @@ class TransactionCardList extends Component<
 
   componentDidMount = () => {
     this.WS.onopen = () => {
-      console.log('connected');
       const op = { op: 'unconfirmed_sub' };
       this.WS.send(JSON.stringify(op));
       this.props.toggleLoading();
@@ -28,8 +27,6 @@ class TransactionCardList extends Component<
 
     // Getting new transaction data and updating state
     this.WS.onmessage = event => {
-      // let performance: any = window.performance;
-      // console.log(performance.memory);
       // Create new array and one event
       this.setState(
         (prevState, prevProps) => {
@@ -54,6 +51,11 @@ class TransactionCardList extends Component<
   };
 
   render() {
+    if (this.props.isLoading) {
+      <div>
+        <h1>Loading...</h1>
+      </div>
+    }
     return (
       <div className="transaction-card-list">
         {this.state.transactionStream.map((block, index) => (

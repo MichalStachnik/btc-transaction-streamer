@@ -39,6 +39,7 @@ class App extends Component<{}, { isLoading: boolean }> {
             <TransactionCardList
               className="transaction-card-list-container"
               toggleLoading={this.toggleLoading}
+              isLoading={this.state.isLoading}
             />
           </Route>
           <Route exact path="/eth/transaction-stream">
